@@ -27,4 +27,9 @@ $app->get('/opt-in-poc', function() use($app) {
     return $app['twig']->render('opt-in-poc.twig');
 });
 
+$app->get('/tracking-code', function() use($app) {
+    $app['monolog']->addDebug('logging output.');
+    return $app['twig']->render('tracking-code.twig');
+});
+
 $app->run();

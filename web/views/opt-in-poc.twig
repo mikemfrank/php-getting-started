@@ -1,28 +1,33 @@
 <html>
 <head>
 <title> Opt-in Proof of Concept</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+            crossorigin="anonymous"></script>
 </head>
 
 <body>
 
 Here is some marketing content.
 
-
+And a button to opt-in: <a href="javascript:MyOptIn('true')"> Opt In</a>
+And a button to opt-out: <a href="javascript:MyOptIn('false')"> Opt Out</a>
 
 <script type="text/javascript">
-    piAId = '19202';
-    piCId = '1001';
-    piHostname = 'pi.pardot.com';
 
-    (function() {
-        function async_load(){
-            var s = document.createElement('script'); s.type = 'text/javascript';
-            s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
-            var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
-        }
-        if(window.attachEvent) { window.attachEvent('onload', async_load); }
-        else { window.addEventListener('load', async_load, false); }
-    })();
+    function MyOptIn(what) {
+
+        var targetUrl = "https://go.pardot.com/analytics?ver=3&campaign_id=1001&account_id=19202&pi_opt_in="+what;
+
+        console.log("Optin: "+what);
+
+        $.ajax({
+            url: targetUrl,
+            type: 'GET',
+            dataType: 'text',
+            crossDomain: true
+        }).done(function(){console.log('done')});
+    }
 </script>
 
 </body>
